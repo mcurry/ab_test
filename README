@@ -1,0 +1,52 @@
+/*
+ * CakePHP A/B Test Plugin
+ * Copyright (c) 2009 Matt Curry
+ * www.PseudoCoder.com
+ * http://github.com/mcurry/ab_test
+ *
+ * @author      Matt Curry <matt@pseudocoder.com>
+ * @license     MIT
+ *
+ */
+
+/* Description */
+A plugin to for doing A/B and Multivariate testing in CakePHP apps.  Tested on CakePHP 1.2.5
+
+/* Instructions */
+ 1. Download the plugin to app/plugins/ab_test.
+ 2. Run /ab_test/config/sql ab_test.sql to create the database tables.
+ 3. Include the component in your controller (this will also include the helper automatically):
+		var $components = array('AbTest.AbTest');
+ 4. Define your tests in bootstrap.php
+		Configure::write('AbTest', array('test-name' => array('option-name-1', 'option-name-2')));
+ 5. Create elements for each of the options in /app/views/elements/ab_tests/test-name
+		For example using the test defined in step for your should have 2 files:
+		/app/views/elements/ab_tests/test-name/option-name-1.ctp
+		/app/views/elements/ab_tests/test-name/option-name-2.ctp
+ 6. In your view, where the test option will appear:
+		<?php echo $abTest->render('test-name'); ?>
+		This will render either option-name-1.ctp or option-name-2.ctp in that spot.
+		The options are shown evenly and a cookie is set, so that returning users will see the same one.
+ 7. When a "conversion" happens track it with:
+		$this->AbTest->conversion('test-name');
+		For example you could put this in your controller after a successful signup.
+
+/* Test Results */
+ There is no "admin" for this plugin.  The DB schema is pretty simple and you could easily open up your favorite DB client and see the results.
+ OR
+ Install the CakePHP Status Plugin (http://github.com/mcurry/status) and include the panel:
+ Configure::write('Status.panels', array('AbTest.stats'));
+ 
+
+/* Advanced */
+ 1. Which option the user is shown may affect how the user is handled.  For example if you split test two different prices you want to make sure to charge them the right price.  In your controller call $this->AbTest->variate('test-name'); and it will return the option-name for that user.  For example:
+	 switch($this->AbTest->variate('price-test')) {
+		default:
+		case 'year-15':
+		 $price = 15;
+		case 'year-20':
+		 $price = 20;
+	 }
+ 2. There is no limit to the number of tests/options.  Create as many elements as you'd like and add the names to the array in bootstrap.php.
+		Configure::write('AbTest', array('test-name-1' => array('option-name-1-1', 'option-name-1-2')),
+															 array('test-name-2' => array('option-name-2-1', 'option-name-2-2', 'option-name-2-3', 'option-name-2-4')));
