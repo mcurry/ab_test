@@ -1,6 +1,6 @@
 /*
  * CakePHP A/B Test Plugin
- * Copyright (c) 2009 Matt Curry
+ * Copyright (c) 2011 Matt Curry
  * www.PseudoCoder.com
  * http://github.com/mcurry/ab_test
  *
@@ -10,7 +10,7 @@
  */
 
 /* Description */
-A plugin to for doing A/B and Multivariate testing in CakePHP apps.  Tested on CakePHP 1.2.5
+A plugin to for doing A/B and Multivariate testing in CakePHP apps.  Tested on CakePHP 1.3.7
 
 /* Instructions */
  1. Download the plugin to app/plugins/ab_test.

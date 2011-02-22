@@ -18,15 +18,15 @@ class AbTestComponent extends Object {
 	function initialize(&$controller, $settings=array()) {
 		$this->controller = $controller;
 		$this->controller->helpers[] = 'AbTest.AbTest';
-		$this->AbTest = ClassRegistry::init('AbTest.AbTest');
 	}
 
 	function variate($key) {
 		$variateKey = $this->Cookie->read('AbTest.' . $key);
 		if (!$variateKey) {
+			$this->AbTest = ClassRegistry::init('AbTest.AbTest');
 			$test = $this->AbTest->load($key);
 			$variateKey = $this->AbTest->next($test);
-			$this->Cookie->write('AbTest.' . $key, $variateKey, false);
+			$this->Cookie->write('AbTest.' . $key, $variateKey, false, '2 weeks');
 		}
 
 		return $variateKey;
@@ -36,6 +36,7 @@ class AbTestComponent extends Object {
 		$variateKey = $this->Cookie->read('AbTest.' . $key);
 
 		if ($variateKey) {
+			$this->AbTest = ClassRegistry::init('AbTest.AbTest');
 			$this->AbTest->conversion($key, $variateKey);
 		}
 	}

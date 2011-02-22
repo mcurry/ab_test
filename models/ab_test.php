@@ -50,6 +50,7 @@ class AbTest extends AppModel {
   }
 
   function conversion($key, $variateKey) {
+		$this->contain('AbTestVariate');
     $found = $this->find('first', array('conditions' => array('AbTest.key' => $key)));
     $variateId = array_pop(Set::extract('/AbTestVariate[key=' . $variateKey . ']/id', $found));
     $this->AbTestVariate->incrementConversion($variateId);
