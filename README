@@ -18,9 +18,10 @@ A plugin to for doing A/B and Multivariate testing in CakePHP apps.  Tested on C
  3. Include the component in your controller (this will also include the helper automatically):
 		var $components = array('AbTest.AbTest');
  4. Define your tests in bootstrap.php
-		Configure::write('AbTest', array('test-name' => array('option-name-1', 'option-name-2')));
- 5. Create elements for each of the options in /app/views/elements/ab_tests/test-name
-		For example using the test defined in step for your should have 2 files:
+		Configure::write('AbTest', array('test-name' => array('options' => array('new' => true, 'returning' => true),
+																													'variates' => array('option-name-1', 'option-name-2'))));
+ 5. Create elements for each of the variates in /app/views/elements/ab_tests/test-name
+		For example using the test defined in step 4 your should have 2 files:
 		/app/views/elements/ab_tests/test-name/option-name-1.ctp
 		/app/views/elements/ab_tests/test-name/option-name-2.ctp
  6. In your view, where the test option will appear:
@@ -32,10 +33,10 @@ A plugin to for doing A/B and Multivariate testing in CakePHP apps.  Tested on C
 		For example you could put this in your controller after a successful signup.
 
 /* Test Results */
- There is no "admin" for this plugin.  The DB schema is pretty simple and you could easily open up your favorite DB client and see the results.
- OR
- Install the CakePHP Status Plugin (http://github.com/mcurry/status) and include the panel:
- Configure::write('Status.panels', array('AbTest.stats'));
+	There is no "admin" for this plugin.  The DB schema is pretty simple and you could easily open up your favorite DB client and see the results.
+	OR
+	Install the CakePHP Status Plugin (http://github.com/mcurry/status) and include the panel:
+	Configure::write('Status.panels', array('AbTest.stats'));
  
 
 /* Advanced */
@@ -48,5 +49,5 @@ A plugin to for doing A/B and Multivariate testing in CakePHP apps.  Tested on C
 		 $price = 20;
 	 }
  2. There is no limit to the number of tests/options.  Create as many elements as you'd like and add the names to the array in bootstrap.php.
-		Configure::write('AbTest', array('test-name-1' => array('option-name-1-1', 'option-name-1-2')),
-															 array('test-name-2' => array('option-name-2-1', 'option-name-2-2', 'option-name-2-3', 'option-name-2-4')));
+		Configure::write('AbTest', array('test-name-1' => array('variates' => array('option-name-1-1', 'option-name-1-2'))),
+															 array('test-name-2' => array('variates' => array('option-name-2-1', 'option-name-2-2', 'option-name-2-3', 'option-name-2-4'))));

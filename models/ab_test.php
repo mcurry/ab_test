@@ -18,6 +18,9 @@ class AbTest extends AppModel {
 
   function load($key) {
     $variates = Configure::read('AbTest.' . $key);
+		if(isset($variates['variates'])) {
+			$variates = $variates['variates'];
+		}
 
     $found = $this->find('first', array('conditions' => array('AbTest.key' => $key)));
     if (!$found) {
@@ -36,6 +39,10 @@ class AbTest extends AppModel {
     $min = false;
 
     foreach($test['AbTestVariate'] as $variate) {
+			if($variate['key'] == 'other/unknown') {
+				continue;
+			}
+			
       if ($min === false || $variate['views'] < $min['views']) {
         $min = $variate;
       }

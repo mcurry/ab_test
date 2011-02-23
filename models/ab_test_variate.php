@@ -17,6 +17,8 @@ class AbTestVariate extends AppModel {
   var $actsAs = array('Containable');
 
   function init($ab_test_id, $variates) {
+    $variates[] = 'other/unknown';
+    
     $existing = $this->find('all', array('fields' => array('AbTestVariate.key'),
                                          'conditions' => array('ab_test_id' => $ab_test_id)));
 
