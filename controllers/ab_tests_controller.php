@@ -16,7 +16,10 @@ class AbTestsController extends AppController {
 	var $components = array('AbTest.AbTest', 'Cookie');
 
   function beforeFilter() {
-    $this->Auth->allow('view');
+		if(!empty($this->Auth)) {
+			$this->Auth->allow('view');
+		}
+    
 		
 		$cookieName = Configure::read('Cookie.name');
 		if($cookieName) {
