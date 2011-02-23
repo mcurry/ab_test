@@ -43,7 +43,7 @@ class AbTestsController extends AppController {
 		}
 		
 		$AbTest = ClassRegistry::init('AbTest.AbTest');
-		$AbTest->contain('AbTestVariate');
+		$AbTest->contain(array('AbTestVariate' => array('order' => 'AbTestVariate.id ASC')));
 		$data = $AbTest->find('first', array('conditions' => array('AbTest.id' => $id)));
 		$this->set('data', $data);
 	}

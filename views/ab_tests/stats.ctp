@@ -10,7 +10,7 @@
 			<td><?php echo $variate['key'] ?></td>
 			<td><?php echo $variate['views'] ?></td>
 			<td><?php echo $variate['conversions'] ?></td>
-			<td><?php echo round(100 * $variate['conversions'] / $variate['views'], 2) ?>%</td>
+			<td><?php if($variate['key'] == 'other/unknown') { echo 'N/A'; } else { echo round(100 * $variate['conversions'] / $variate['views'], 2); } ?>%</td>
 		</tr>
 	<?php } ?>
 </table>
