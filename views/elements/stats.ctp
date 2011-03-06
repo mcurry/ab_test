@@ -1,6 +1,6 @@
 <?php
 	$tests = ClassRegistry::init('AbTest')->find('list', array('fields' => array('id', 'key'),
-																														 'order' => 'key ASC'));
+																														 'order' => 'created DESC'));
 ?>
 
 
